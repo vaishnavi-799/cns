@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Diffie-Hellman Key Exchange</title>
+</head>
+<body>
+    <h2>Diffie-Hellman Key Exchange</h2>
+
+    <label>Prime number (p): </label>
+    <input type="number" id="p" value="23"><br><br>
+
+    <label>Generator (g): </label>
+    <input type="number" id="g" value="5"><br><br>
+
+    <label>Alice's private key (a): </label>
+    <input type="number" id="a" value="6"><br><br>
+
+    <label>Bob's private key (b): </label>
+    <input type="number" id="b" value="15"><br><br>
+
+    <button onclick="exchange()">Generate Secret Key</button>
+
+    <h3 id="result"></h3>
+
+    <script>
+        function powerMod(base, exp, mod) {
+            let r = 1;
+            for (let i = 0; i < exp; i++) {
+                r = (r * base) % mod;
+            }
+            return r;
+        }
+
+        function exchange() {
+            let p = Number(document.getElementById("p").value);
+            let g = Number(document.getElementById("g").value);
+            let a = Number(document.getElementById("a").value);
+            let b = Number(document.getElementById("b").value);
+
+            let A = powerMod(g, a, p);
+            let B = powerMod(g, b, p);
+
+            let keyA = powerMod(B, a, p);
+            let keyB = powerMod(A, b, p);
+
+            document.getElementById("result").innerHTML =
+                "Alice's public value: " + A + "<br>" +
+                "Bob's public value: " + B + "<br>" +
+                "Alice's secret key: " + keyA + "<br>" +
+                "Bob's secret key: " + keyB + "<br>" +
+                "Keys match: " + (keyA === keyB);
+        }
+    </script>
+</body>
+</html>
