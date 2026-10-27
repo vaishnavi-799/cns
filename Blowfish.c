@@ -24,3 +24,37 @@ int main() {
 
     return 0;
 }
+
+
+// #include <stdio.h>
+// #include <string.h>
+
+// int main()
+// {
+//     char s[100], k[100], e[100], d[100];
+//     int i, n, m;
+
+//     printf("Enter plaintext: ");
+//     scanf("%99s", s);
+
+//     printf("Enter key: ");
+//     scanf("%99s", k);
+
+//     n = strlen(s);
+//     m = strlen(k);
+
+//     for(i = 0; i < n; i++)
+//         e[i] = s[i] ^ k[i % m];
+
+//     printf("Encrypted: ");
+//     for(i = 0; i < n; i++)
+//         printf("%02X ", (unsigned char)e[i]);
+
+//     for(i = 0; i < n; i++)
+//         d[i] = e[i] ^ k[i % m];
+
+//     d[n] = '\0';
+//     printf("\nDecrypted: %s\n", d);
+
+//     return 0;
+// }
