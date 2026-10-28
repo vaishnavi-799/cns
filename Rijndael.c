@@ -4,6 +4,35 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import java.util.Base64;
 
+public class Rijndael {
+    public static void main(String[] args) throws Exception {
+        String msg = "Hello World";
+
+        KeyGenerator kg = KeyGenerator.getInstance("AES");
+        kg.init(128);
+        SecretKey key = kg.generateKey();
+
+        Cipher c = Cipher.getInstance("AES/ECB/PKCS5Padding");
+
+        c.init(Cipher.ENCRYPT_MODE, key);
+        byte[] enc = c.doFinal(msg.getBytes("UTF-8"));
+
+        String encrypted = Base64.getEncoder().encodeToString(enc);
+        System.out.println("Encrypted: " + encrypted);
+
+        c.init(Cipher.DECRYPT_MODE, key);
+        byte[] dec = c.doFinal(Base64.getDecoder().decode(encrypted));
+
+        System.out.println("Decrypted: " +
+                           new String(dec, "UTF-8"));
+    }
+}
+
+import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import java.util.Base64;
+
 public class Blowfish {
     public static void main(String[] args) throws Exception {
         String msg = "Hello World";
